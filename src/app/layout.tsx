@@ -7,8 +7,11 @@ import Navbar from "@/components/layout/Navbar";
 import { FitLogProvider } from "@/context/FitLogContext";
 
 export const metadata: Metadata = {
-  title: "FitLog",
-  description: "Train hard. Log honest.",
+  title: "Fit-Log",
+  description: "Workout library and workout planning application",
+  icons: {
+    icon: "/images/logo.png",
+  },
 };
 
 export default function RootLayout({
