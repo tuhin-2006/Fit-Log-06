@@ -14,7 +14,6 @@ export default function Loading() {
             border-t-[#baff00]
           "
         />
-
         {/* Text */}
         <p
           className="

@@ -142,7 +142,6 @@ export default function WorkoutActions({ workout }: WorkoutActionsProps) {
             strokeLinejoin="round"
           />
         </svg>
-
         <span>
           {saved ? "Saved" : "Save for later"}
         </span>
