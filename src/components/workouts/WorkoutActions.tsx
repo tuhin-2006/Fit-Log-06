@@ -1,45 +1,50 @@
 "use client";
 
-import type { Workout } from "@/types/workout";
-
 import { useFitLog } from "@/context/FitLogContext";
+import type { Workout } from "@/types/workout";
 
 interface WorkoutActionsProps {
   workout: Workout;
 }
 
 export default function WorkoutActions({ workout }: WorkoutActionsProps) {
-  const {
-    isInPlan,
-    isSaved,
-    addToPlan,
-    removeFromPlan,
-    saveWorkout,
-    removeSaved,
-  } = useFitLog();
+  const { isInPlan, isSaved, addToPlan, saveWorkout, showToast } = useFitLog();
 
   const addedToPlan = isInPlan(workout.id);
   const saved = isSaved(workout.id);
 
   const handlePlanClick = () => {
+    // Already in plan
     if (addedToPlan) {
-      removeFromPlan(workout.id);
-    } else {
-      addToPlan(workout);
+      showToast("Already added to today's plan");
+      return;
     }
+
+    if (saved) {
+      showToast("This workout is already saved ");
+      return;
+    }
+
+    addToPlan(workout);
   };
 
   const handleSaveClick = () => {
+    // Already saved
     if (saved) {
-      removeSaved(workout.id);
-    } else {
-      saveWorkout(workout);
+      showToast("Already saved ");
+      return;
     }
+
+    if (addedToPlan) {
+      showToast("This workout is already added to today's plan");
+      return;
+    }
+
+    saveWorkout(workout);
   };
 
   return (
     <div className="mt-7 flex flex-wrap gap-3">
-      {/* Add to Plan */}
       <button
         type="button"
         onClick={handlePlanClick}
@@ -55,12 +60,13 @@ export default function WorkoutActions({ workout }: WorkoutActionsProps) {
           transition
           ${
             addedToPlan
-              ? "bg-[#18220b] text-[#baff00]"
-              : "bg-[#baff00] text-black hover:bg-[#c8ff38]"
+              ? "bg-[#18220b] text-[#baff00] hover:bg-[#202d0d]"
+              : saved
+                ? "cursor-not-allowed border border-white/10 bg-[#111319] text-[#596274]"
+                : "bg-[#baff00] text-black hover:bg-[#c8ff38]"
           }
         `}
       >
-        {/* Square Icon */}
         {addedToPlan ? (
           <svg
             width="16"
@@ -98,13 +104,10 @@ export default function WorkoutActions({ workout }: WorkoutActionsProps) {
         )}
 
         <span>
-          {addedToPlan
-            ? "Added to today's plan"
-            : "Add to today's plan"}
+          {addedToPlan ? "Added to today's plan" : "Add to today's plan"}
         </span>
       </button>
 
-      {/* Save for Later */}
       <button
         type="button"
         onClick={handleSaveClick}
@@ -122,11 +125,12 @@ export default function WorkoutActions({ workout }: WorkoutActionsProps) {
           ${
             saved
               ? "border-[#baff00] bg-[#18220b] text-[#baff00]"
-              : "border-white/10 bg-[#111319] text-white hover:bg-white/5"
+              : addedToPlan
+                ? "cursor-not-allowed border-white/10 bg-[#111319] text-[#596274]"
+                : "border-white/10 bg-[#111319] text-white hover:bg-white/5"
           }
         `}
       >
-        {/* Bookmark Icon */}
         <svg
           width="16"
           height="16"
@@ -142,9 +146,8 @@ export default function WorkoutActions({ workout }: WorkoutActionsProps) {
             strokeLinejoin="round"
           />
         </svg>
-        <span>
-          {saved ? "Saved" : "Save for later"}
-        </span>
+
+        <span>{saved ? "Saved" : "Save for later"}</span>
       </button>
     </div>
   );

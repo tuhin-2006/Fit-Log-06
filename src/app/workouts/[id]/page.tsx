@@ -35,12 +35,12 @@ export default async function WorkoutDetailsPage({
           ← Back to workouts
         </Link>
 
-        <section className="grid gap-8 lg:grid-cols-[1fr_1fr]">
-          <div className="relative aspect-[4/3] overflow-hidden rounded-xl border border-white/10 bg-[#15171e]">
+        <section className="grid items-stretch gap-8 lg:grid-cols-[1fr_1fr]">
+          <div className="relative min-h-[360px] overflow-hidden rounded-xl border border-white/10 bg-[#15171e] lg:min-h-0">
             <img
               src={workout.image}
               alt={workout.name}
-              className="h-full w-full object-cover"
+              className="absolute inset-0 h-full w-full object-cover"
             />
 
             <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
@@ -69,6 +69,7 @@ export default async function WorkoutDetailsPage({
             <div className="mt-6 overflow-hidden rounded-xl border border-white/10 bg-[#15171e]">
               <div className="flex items-center justify-between border-b border-white/5 px-4 py-4">
                 <span className="text-xs text-[#71809a]">Equipment</span>
+
                 <span className="text-xs font-medium text-white">
                   {workout.equipment}
                 </span>
@@ -76,6 +77,7 @@ export default async function WorkoutDetailsPage({
 
               <div className="flex items-center justify-between border-b border-white/5 px-4 py-4">
                 <span className="text-xs text-[#71809a]">Difficulty</span>
+
                 <span className="text-xs font-medium text-white">
                   {workout.difficulty}
                 </span>
@@ -83,6 +85,7 @@ export default async function WorkoutDetailsPage({
 
               <div className="flex items-center justify-between border-b border-white/5 px-4 py-4">
                 <span className="text-xs text-[#71809a]">Duration</span>
+
                 <span className="text-xs font-medium text-white">
                   {workout.duration} min
                 </span>
@@ -90,6 +93,7 @@ export default async function WorkoutDetailsPage({
 
               <div className="flex items-center justify-between border-b border-white/5 px-4 py-4">
                 <span className="text-xs text-[#71809a]">Calories Burned</span>
+
                 <span className="text-xs font-medium text-white">
                   {workout.caloriesBurned} kcal
                 </span>
@@ -97,6 +101,7 @@ export default async function WorkoutDetailsPage({
 
               <div className="flex items-center justify-between border-b border-white/5 px-4 py-4">
                 <span className="text-xs text-[#71809a]">Sets</span>
+
                 <span className="text-xs font-medium text-white">
                   {workout.sets}
                 </span>
@@ -104,6 +109,7 @@ export default async function WorkoutDetailsPage({
 
               <div className="flex items-center justify-between border-b border-white/5 px-4 py-4">
                 <span className="text-xs text-[#71809a]">Reps</span>
+
                 <span className="text-xs font-medium text-white">
                   {workout.reps}
                 </span>
@@ -111,6 +117,7 @@ export default async function WorkoutDetailsPage({
 
               <div className="flex items-center justify-between px-4 py-4">
                 <span className="text-xs text-[#71809a]">Rating</span>
+
                 <span className="text-xs font-medium text-[#baff00]">
                   ★ {workout.rating}
                 </span>
