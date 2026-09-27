@@ -107,5 +107,5 @@ FitLog uses a REST API to retrieve workout information.
 ### Base API
 
 ```text
-https://api.abcz.workers.dev/api/fitlog
+https://api.api-store.workers.dev/api/fitlog
 ```
